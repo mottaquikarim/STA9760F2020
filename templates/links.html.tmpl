@@ -1,0 +1,12 @@
+{{ define "content" }}
+	{{ range . }}
+    <section class="js-content">
+		<h5>
+            <a href="{{ .Fields.Link }}" target="_blank">
+                {{ .Fields.Title }}
+            </a>
+         </h5>
+		<p>{{ .Fields.Description }}</p>
+    </section>
+	{{ end }}
+{{ end }}

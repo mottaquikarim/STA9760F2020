@@ -1,0 +1,18 @@
+{
+	"nav": [{
+		"name": "Home",
+		"key": "@home",
+		"filenameRoot": "index",
+        "viewname": "Grid view"
+	}, {
+		"name": "Links",
+		"key": "@links",
+		"filenameRoot": "links",
+        "viewname": "Grid view"
+	}, {
+		"name": "Quizzes",
+		"key": "@quizzes",
+		"filenameRoot": "quiz",
+        "viewname": "Grid view"
+	}]
+}

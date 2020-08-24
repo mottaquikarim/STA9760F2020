@@ -1,0 +1,26 @@
+{{ define "content" }}
+	{{ range . }}
+    <section class="js-content">
+        <h4>{{ .Fields.Title }}</h4>
+        <small>{{ .Fields.Date }}</small>
+		<h5>Grades</h5>
+        <iframe
+            class="airtable-embed"
+            src="https://airtable.com/embed/{{ .Fields.Grades }}?backgroundColor=red&viewControls=on"
+            frameborder="0"
+            onmousewheel=""
+            width="100%"
+            height="533" 
+            style="background: transparent; border: 1px solid #ccc;"></iframe>
+		<h5>Questions</h5>
+        <iframe
+            class="airtable-embed"
+            src="https://airtable.com/embed/{{ .Fields.Questions }}?backgroundColor=red&viewControls=on"
+            frameborder="0"
+            onmousewheel=""
+            width="100%"
+            height="533" 
+            style="background: transparent; border: 1px solid #ccc;"></iframe>
+    </section>
+	{{ end }}
+{{ end }}

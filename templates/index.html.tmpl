@@ -1,0 +1,14 @@
+{{ define "content" }}
+	{{ range . }}
+    <section class="js-content inverted">
+		<h5>
+            <a href="{{ .Fields.SubtitleLink }}" target="_blank">
+                {{ .Fields.Title }}: {{ .Fields.Subtitle }}
+            </a>
+         </h5>
+        <strong>{{ .Fields.Date }}</strong>
+		<p>{{ .Fields.Desc }}</p>
+        <strong><a target="_blank" href="{{ .Fields.ResourcesLink }}">Resources</a></strong>
+    </section>
+	{{ end }}
+{{ end }}
