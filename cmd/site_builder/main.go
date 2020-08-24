@@ -10,11 +10,11 @@ func main() {
 	if err := airgo.RebuildSite(airgo.RebuildSiteOpts{
 		Datadir:       "data",
 		Template:      "templates",
-		Output:        "static",
+		Output:        "docs",
 		TemplateNames: []string{"layout"},
 	}); err != nil {
 		log.Fatal(err)
 	}
 
-	airgo.DevServer("static", 80)
+	airgo.DevServer("docs", 80)
 }
