@@ -24,4 +24,4 @@ jobs:
     - name: Commits
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: Apply changes
+        commit_message: Deploy latest changes 
