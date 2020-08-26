@@ -2,6 +2,8 @@
 ROOT                    := $(PWD)#$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 GO_HTML_COV             := ./coverage.html
 GO_TEST_OUTFILE         := ./c.out
+GOLANG_DOCKER_IMAGE     := golang:1.13
+GOLANG_DOCKER_CONTAINER := airgo-container
 
 #   Format according to gofmt: https://github.com/cytopia/docker-gofmt
 #   Usage:
@@ -38,6 +40,17 @@ refresh:
 	docker-compose exec -T airgo_develop go build -o build/refresh_data cmd/refresh_data/main.go || true
 	docker-compose exec -T airgo_develop ./build/refresh_data ${arguments}
 
+clean:
+	docker rm -f ${GOLANG_DOCKER_CONTAINER} || true
+
+assemble: clean
+	docker run --rm -d --name ${GOLANG_DOCKER_CONTAINER} -w /app -v ${ROOT}:/app ${GOLANG_DOCKER_IMAGE} tail -f /dev/null
+	docker exec ${GOLANG_DOCKER_CONTAINER} go mod download
+	docker exec ${GOLANG_DOCKER_CONTAINER} go build -o build/refresh_data cmd/refresh_data/main.go || true
+	docker exec ${GOLANG_DOCKER_CONTAINER} ./build/refresh_data ${arguments}
+	docker exec ${GOLANG_DOCKER_CONTAINER} go build -o build/site_builder cmd/site_builder/main.go || true
+	docker exec ${GOLANG_DOCKER_CONTAINER} ./build/site_builder
+
 #   Usage:
 #       make test-dev
 #       make test-dev package=util
@@ -55,4 +68,3 @@ logs:
 	docker-compose logs -f airgo_develop
 
 develop: compose logs
-

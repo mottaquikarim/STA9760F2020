@@ -13,7 +13,7 @@ import (
 // these are the key variables that store the input
 // required to make this service run
 var (
-	fs     = flag.NewFlagSetWithEnvPrefix(os.Args[0], "STREAK", 0)
+	fs     = flag.NewFlagSetWithEnvPrefix(os.Args[0], "STA9760F2020", 0)
 	apiKey = fs.String("api-key", "XXXXX", "Airtable API Key")
 	baseId = fs.String("base-id", "XXXXX", "Airtable Base Id")
 )

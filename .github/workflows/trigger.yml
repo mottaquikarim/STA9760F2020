@@ -1,0 +1,27 @@
+name: Rebuild and deploy static site 
+
+on:
+  repository_dispatch:
+    types: trigger-rebuild 
+
+
+jobs:
+  rebuild_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout master
+      uses: actions/checkout@v2
+      with:
+        ref: master
+
+    - name: Rebuild Data
+      env: # Or as an environment variable
+        AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+        AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+      run: |
+        make assemble arguments="-api-key=${AIRTABLE_API_KEY} -base-id=${AIRTABLE_BASE_ID}"
+
+    - name: Commits
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Apply changes
